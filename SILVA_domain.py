@@ -30,7 +30,7 @@ for i, n in num_col:
     data1[n] = split.str.get(-1)
 
 data = pd.merge(data1, data2, left_index = True, right_index = True, how = 'left')
-
+data = data[data['Domain'] != 'Unclassified']
 reads = data.iloc[:, 7:]
 reads_sum = reads.sum(axis = 0).to_frame()
 col_count = reads.count(1)[1]
