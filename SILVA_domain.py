@@ -11,7 +11,6 @@ filename = filedialog.askopenfilename()
 
 data1 = pd.read_excel(filename, sheet_name = 0, na_values= ['nan', ' ',''], usecols = "A:B", header = None, index_col = 0)
 data2 = pd.read_excel(filename, sheet_name = 1, index_col = 0, na_values= ['nan', ' ', ''])
-
 data1.index = data1.index.astype('str')
 name_split = data1.index.str.split(";")
 data1.index = name_split.str.get(0)
@@ -50,9 +49,9 @@ def domain(df):
     return (check)
     
 def num_to_per(df, col_count, r_sum):
-    for i in range(0, 2):
+    for i in range(0, len(df)):
         for j in range(0, col_count):
-            per = df.iloc[i,j]/r_sum[0][j] * 100
+            per = df.iloc[i,j]/r_sum.iloc[j][0] * 100
             df.iloc[i,j] = round(per,3)
     return (df)
 
