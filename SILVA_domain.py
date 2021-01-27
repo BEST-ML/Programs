@@ -7,14 +7,26 @@ Created on Thu Dec 31 12:33:23 2020
 import pandas as pd 
 from tkinter import filedialog
 
+#import data
 filename = filedialog.askopenfilename()
-
 data1 = pd.read_excel(filename, sheet_name = 0, na_values= ['nan', ' ',''], usecols = "A:B", header = None, index_col = 0)
 data2 = pd.read_excel(filename, sheet_name = 1, index_col = 0, na_values= ['nan', ' ', ''])
+
+#search name frome the namemap.txt
+filename = filedialog.askopenfilename()
+namemap = pd.read_excel(filename,index_col = 0, na_values= ['nan', ' ', ''], header = None)
+name_split2 = namemap.index.str.split("\\")
+namemap.index = name_split2.str.get(0)
+namemap['name'] = name_split2.str.get(1)
+namemap = namemap.T
+namemap.columns = namemap.columns.astype('int64')
+data2 = pd.concat([namemap, data2], join = 'inner')
+data2.rename(columns = data2.loc['name'], inplace = True)
+data2.drop('name')
+
 data1.index = data1.index.astype('str')
 name_split = data1.index.str.split(";")
-data1.index = name_split.str.get(0)
-
+data1.index = name_split.str.get(0)                                   
 data1.iloc[:,0] = data1.iloc[:,0].astype('str')
 split = data1.iloc[:,0].str.split(";")
 

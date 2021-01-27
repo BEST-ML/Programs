@@ -26,7 +26,7 @@ Number_name = list(zip(Number, Name, Name_per, Name_major))
 def num_to_per(df1, df2, row_count, col_count, r_sum):
     for i in range(0, row_count):
         for j in range(1, col_count+1):
-            per = df1.iloc[i,j]/r_sum[0][j-1]*100
+            per = df1.iloc[i,j]/r_sum.iloc[j-1][0]*100
             df2.iloc[i,j] = round(per,3)
     return (df2)
 
@@ -50,5 +50,4 @@ for i, j, p, r in Number_name:
         new2.to_excel(writer, sheet_name = p)
         new3.to_excel(writer, sheet_name = r)
 
-        
 
