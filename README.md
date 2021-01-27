@@ -14,7 +14,7 @@ second filedialog
 
 3. namemap in txt
 
-This helps you replace the name code with name found from Namemap.xlsx
+This helps you replace the name code with name found from Namemap.txt
 
 ### Return 
 1. xlsx file merging hierarchy and read abundance with the name from Namemap
