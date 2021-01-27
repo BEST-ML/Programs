@@ -14,15 +14,11 @@ data2 = pd.read_excel(filename, sheet_name = 1, index_col = 0, na_values= ['nan'
 
 #search name frome the namemap.txt
 filename = filedialog.askopenfilename()
-namemap = pd.read_excel(filename,index_col = 0, na_values= ['nan', ' ', ''], header = None)
-name_split2 = namemap.index.str.split("\\")
-namemap.index = name_split2.str.get(0)
-namemap['name'] = name_split2.str.get(1)
+namemap = pd.read_table(filename,index_col = 0, sep = '\\', header = None)
 namemap = namemap.T
-namemap.columns = namemap.columns.astype('int64')
 data2 = pd.concat([namemap, data2], join = 'inner')
-data2.rename(columns = data2.loc['name'], inplace = True)
-data2.drop('name')
+data2.rename(columns = data2.iloc[0], inplace = True)
+data2.drop(index = 1, inplace = True)
 
 data1.index = data1.index.astype('str')
 name_split = data1.index.str.split(";")
