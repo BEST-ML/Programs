@@ -6,7 +6,6 @@ Created on Thu Dec 31 12:33:23 2020
 """
 import pandas as pd 
 from tkinter import filedialog
-
 #import data
 filename = filedialog.askopenfilename()
 data1 = pd.read_excel(filename, sheet_name = 0, na_values= ['nan', ' ',''], usecols = "A:B", header = None, index_col = 0)
@@ -44,9 +43,9 @@ reads_sum = reads.sum(axis = 0).to_frame()
 col_count = reads.count(1)[1]
 row_count = reads.iloc[:,-1].count()
 
-unid = ['uncultured', 'unidentified', 'Ambiguous']
-for j in range(1, 7):
-    for i in range(1, row_count):
+unid = ['uncultured', 'unidentified', 'Ambiguous', 'metagenome', 'Unknown']
+for j in range(0, 7):
+    for i in range(0, row_count):
         if any(f in str(data.iloc[i,j]) for f in unid):
             data.iloc[i,j] = 'unidentified'
             
@@ -84,7 +83,10 @@ else:
     file = input("file name (add .xlsx): ")
     data.to_excel(excel_writer=file, sheet_name = "OTUs")
 
-
+'''
+import subprocess
+subprocess.call(['python3', 'SILVA_conversion.py', file])
+'''
 
 
 
