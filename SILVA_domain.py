@@ -43,7 +43,7 @@ reads_sum = reads.sum(axis = 0).to_frame()
 col_count = reads.count(1)[1]
 row_count = reads.iloc[:,-1].count()
 
-unid = ['uncultured', 'unidentified', 'Ambiguous', 'metagenome', 'Unknown']
+unid = ['uncultured', 'unidentified', 'Ambiguous', 'metagenome', 'Unknown', 'group']
 for j in range(0, 7):
     for i in range(0, row_count):
         if any(f in str(data.iloc[i,j]) for f in unid):
