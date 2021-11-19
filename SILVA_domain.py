@@ -6,6 +6,8 @@ Created on Thu Dec 31 12:33:23 2020
 """
 import pandas as pd 
 from tkinter import filedialog
+import numpy as np
+
 #import data
 filename = filedialog.askopenfilename()
 data1 = pd.read_excel(filename, sheet_name = 0, na_values= ['nan', ' ',''], usecols = "A:B", header = None, index_col = 0)
@@ -36,7 +38,7 @@ for i, n in num_col:
     split = data1.iloc[:,i].str.split("__")
     data1[n] = split.str.get(-1)
 
-data = pd.merge(data1, data2, left_index = True, right_index = True, how = 'left')
+data = pd.merge(data1, data2, left_index = True, right_index = True, how = 'inner')
 data = data[data['Domain'] != 'Unclassified']
 reads = data.iloc[:, 7:]
 reads_sum = reads.sum(axis = 0).to_frame()
