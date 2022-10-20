@@ -6,11 +6,15 @@ Input file should be in one file consisting of two sheets.
 ### Input
 first filedialog
 
-1. 1st sheet should be the hierarchical data from SILVA (taxanomy server) and
-2. 2nd sheet should be the read abundance result from NGS analysis.
-Those two sheets are the raw data from each server.
+1. hierarchical data from SILVA (taxanomy server) in txt file (~_tax_assignments.txt)
 
 second filedialog
+
+2. read abundance result from taxonomy server in txt file
+
+Those two files are the raw files from the server.
+
+third filedialog
 
 3. namemap in txt
 
