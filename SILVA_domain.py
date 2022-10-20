@@ -9,12 +9,15 @@ from tkinter import filedialog
 import numpy as np
 
 #import data
-filename = filedialog.askopenfilename()
-data1 = pd.read_excel(filename, sheet_name = 0, na_values= ['nan', ' ',''], usecols = "A:B", header = None, index_col = 0)
-data2 = pd.read_excel(filename, sheet_name = 1, index_col = 0, na_values= ['nan', ' ', ''])
+filename1 = filedialog.askopenfilename(title = 'hierarchical data from SILVA (**_tax_assignments)')
+filename2 = filedialog.askopenfilename(title = 'read abundance data from SILVA')
+
+data1 = pd.read_csv(filename1, sep = "\t", na_values= ['nan', ' ',''], usecols = [0,1], header = None, index_col = 0)
+data2 = pd.read_csv(filename2, sep = "\t", index_col = 0, na_values= ['nan', ' ', ''])
+data2.columns = data2.columns.astype(int)
 
 #search name frome the namemap.txt
-filename = filedialog.askopenfilename()
+filename = filedialog.askopenfilename(title = 'Namemap')
 namemap = pd.read_table(filename,index_col = 0, sep = '\\', header = None)
 namemap = namemap.T
 data2 = pd.concat([namemap, data2], join = 'inner')
